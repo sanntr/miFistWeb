@@ -1,29 +1,23 @@
-
+{% block article %}
+{% endblock %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link  rel="stylesheet" href="{% static 'styles/article.css' %}">
-    <title>Document</title>
-</head>
-<body>
+
+<link  rel="stylesheet" href="{% static 'styles/article.css'%}">
 
 <div id="articles-container">
     {% for article in result %}
-    <article class="article">
+    <article class="article">   
         <h3>{{ article.title }}</h3>
         <p>Autor del articulo: {{ article.author }}</p>
         <p>{{ article.description }}</p>
+        {% if article.urlToImage != None%}
         <img src="{{ article.urlToImage }}" alt="Imagen del articulo">
-        <p>{{ article.content | safe }}</p>
+        {% endif %}
+        <p>{{ article.content}}</p>
         <p class="url_doc">Para leer el documento completo</p>
-        <a class="url_doc" href="{{ article.url_doc }}" target="_blank">
+        <a  class="url_doc" href="{{ article.url_doc }}" target="_blank" style="text-decoration: none;">
             <button>{{ article.name }}</button>
         </a>
     </article>
     {% endfor %}
 </div>
-
-</html>
